@@ -151,8 +151,6 @@ const Rooms = () => {
                     ))
                 )}
             </div>
-        </div>
-            
             <Modal 
                 isOpen={isModalOpen} 
                 onClose={() => setIsModalOpen(false)} 

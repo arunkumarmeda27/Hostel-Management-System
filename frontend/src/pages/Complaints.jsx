@@ -159,8 +159,6 @@ const Complaints = () => {
                     ))
                 )}
             </div>
-        </div>
-            
             <Modal 
                 isOpen={isModalOpen} 
                 onClose={() => setIsModalOpen(false)} 

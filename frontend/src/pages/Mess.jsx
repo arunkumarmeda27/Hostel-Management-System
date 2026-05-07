@@ -158,8 +158,6 @@ const Mess = () => {
                     </table>
                 </div>
             </div>
-        </div>
-            
             <Modal 
                 isOpen={isModalOpen} 
                 onClose={() => setIsModalOpen(false)} 
