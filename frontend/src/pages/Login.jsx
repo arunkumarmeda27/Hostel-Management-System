@@ -25,7 +25,7 @@ const Login = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="mb-8 text-center">
-                    <div className="w-20 h-20 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                    <div className="w-full max-w-[280px] h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mx-auto mb-6 overflow-hidden p-2">
                         <img src="/logo.png" alt="DSCE Logo" className="w-full h-full object-contain" />
                     </div>
                     <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-2">
