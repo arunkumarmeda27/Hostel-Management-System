@@ -15,8 +15,8 @@ const Fees = () => {
     const [formData, setFormData] = useState({
         StudentID: '',
         Amount: '',
-        DueDate: '',
-        PaymentStatus: 'Pending'
+        DueDate: new Date().toISOString().split('T')[0],
+        PaymentStatus: 'Paid'
     });
 
     useEffect(() => {
@@ -58,7 +58,8 @@ const Fees = () => {
 
     const openAddModal = () => {
         setEditingFee(null);
-        setFormData({ StudentID: '', Amount: '', DueDate: '', PaymentStatus: 'Pending' });
+        const today = new Date().toISOString().split('T')[0];
+        setFormData({ StudentID: '', Amount: '', DueDate: today, PaymentStatus: 'Paid' });
         setIsModalOpen(true);
     };
 
