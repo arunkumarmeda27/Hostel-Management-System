@@ -16,8 +16,8 @@ const Sidebar = () => {
     return (
         <aside className="w-64 bg-white border-r border-gray-200 h-screen hidden md:flex flex-col shadow-sm">
             <div className="h-16 flex items-center gap-3 px-6 border-b border-gray-100 bg-white">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src="/logo.png" alt="DSCE Logo" className="w-full h-full object-contain" onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/40?text=DSCE'; }} />
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-indigo-50">
+                    <img src="/logo.png" alt="DSCE" className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col">
                     <span className="font-bold text-gray-900 leading-tight">Dayananda Sagar</span>
