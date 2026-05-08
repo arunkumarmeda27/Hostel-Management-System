@@ -6,6 +6,7 @@ import Modal from '../components/Modal';
 
 const Students = () => {
     const [students, setStudents] = useState([]);
+    const [rooms, setRooms] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
     
@@ -25,7 +26,17 @@ const Students = () => {
 
     useEffect(() => {
         fetchStudents();
+        fetchRooms();
     }, []);
+
+    const fetchRooms = async () => {
+        try {
+            const { data } = await api.get('/rooms');
+            setRooms(data);
+        } catch (error) {
+            console.error('Failed to fetch rooms');
+        }
+    };
 
     const fetchStudents = async () => {
         try {
@@ -240,12 +251,20 @@ const Students = () => {
                             ></textarea>
                         </div>
                         <div className="md:col-span-2">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Assign Room ID (Optional)</label>
-                            <input 
-                                type="number" placeholder="Enter Room ID" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                                value={formData.RoomID} onChange={(e) => setFormData({...formData, RoomID: e.target.value})}
-                            />
-                            <p className="text-xs text-gray-500 mt-1">Leave blank to unassign or assign later.</p>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Assign Room (Optional)</label>
+                            <select 
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                                value={formData.RoomID} 
+                                onChange={(e) => setFormData({...formData, RoomID: e.target.value})}
+                            >
+                                <option value="">-- Unassigned --</option>
+                                {rooms.map(room => (
+                                    <option key={room.RoomID} value={room.RoomID}>
+                                        Room {room.RoomNumber} ({room.RoomType} - {room.Capacity - room.OccupiedCount} spots left)
+                                    </option>
+                                ))}
+                            </select>
+                            <p className="text-xs text-gray-500 mt-1">Select a room to assign the student to.</p>
                         </div>
                     </div>
                     
