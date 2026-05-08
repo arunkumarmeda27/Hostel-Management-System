@@ -24,17 +24,17 @@ const Login = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="flex justify-center text-indigo-600">
-                    <Home size={48} />
+                <div className="mb-8 text-center">
+                    <div className="w-20 h-20 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                        <img src="/logo.png" alt="DSCE Logo" className="w-full h-full object-contain" onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/80?text=DSCE'; }} />
+                    </div>
+                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-2">
+                        Dayananda Sagar Institutions Hostel
+                    </h1>
+                    <p className="text-gray-500 font-medium">
+                        Sign in to manage the hostel
+                    </p>
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    HostelPro Admin
-                </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                    Sign in to manage the hostel
-                </p>
-            </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
