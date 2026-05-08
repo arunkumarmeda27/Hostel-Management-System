@@ -60,13 +60,13 @@ const Dashboard = () => {
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                     <h2 className="text-lg font-semibold mb-4 text-gray-800">Fee Collection (Monthly)</h2>
                     <div className="h-72">
-                        <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                        <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
                             <BarChart data={charts?.feeData}>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                                 <XAxis dataKey="month" axisLine={false} tickLine={false} />
                                 <YAxis axisLine={false} tickLine={false} />
                                 <Tooltip cursor={{fill: 'transparent'}} />
-                                <Bar dataKey="total" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="total" fill="#4f46e5" radius={[4, 4, 0, 0]} maxBarSize={50} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -75,32 +75,40 @@ const Dashboard = () => {
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                     <h2 className="text-lg font-semibold mb-4 text-gray-800">Room Occupancy by Type</h2>
                     <div className="h-72">
-                        <ResponsiveContainer width="99%" height="100%" minHeight={1}>
-                            <PieChart>
-                                <Pie
-                                    data={charts?.occupancyData}
-                                    cx="50%"
-                                    cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    paddingAngle={5}
-                                    dataKey="value"
-                                >
+                        {charts?.occupancyData?.length > 0 ? (
+                            <>
+                                <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
+                                    <PieChart>
+                                        <Pie
+                                            data={charts?.occupancyData}
+                                            cx="50%"
+                                            cy="50%"
+                                            innerRadius={60}
+                                            outerRadius={80}
+                                            paddingAngle={5}
+                                            dataKey="value"
+                                        >
+                                            {charts?.occupancyData.map((entry, index) => (
+                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))}
+                                        </Pie>
+                                        <Tooltip />
+                                    </PieChart>
+                                </ResponsiveContainer>
+                                <div className="flex justify-center gap-4 mt-4">
                                     {charts?.occupancyData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        <div key={entry.name} className="flex items-center gap-2">
+                                            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
+                                            <span className="text-sm text-gray-600">{entry.name}</span>
+                                        </div>
                                     ))}
-                                </Pie>
-                                <Tooltip />
-                            </PieChart>
-                        </ResponsiveContainer>
-                        <div className="flex justify-center gap-4 mt-4">
-                            {charts?.occupancyData.map((entry, index) => (
-                                <div key={entry.name} className="flex items-center gap-2">
-                                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
-                                    <span className="text-sm text-gray-600">{entry.name}</span>
                                 </div>
-                            ))}
-                        </div>
+                            </>
+                        ) : (
+                            <div className="flex items-center justify-center h-full text-gray-400">
+                                No rooms are currently occupied.
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
