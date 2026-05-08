@@ -6,6 +6,7 @@ import Modal from '../components/Modal';
 
 const Fees = () => {
     const [fees, setFees] = useState([]);
+    const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     
     // Modal & Form State
@@ -20,7 +21,17 @@ const Fees = () => {
 
     useEffect(() => {
         fetchFees();
+        fetchStudents();
     }, []);
+
+    const fetchStudents = async () => {
+        try {
+            const { data } = await api.get('/students');
+            setStudents(data);
+        } catch (error) {
+            console.error('Failed to fetch students');
+        }
+    };
 
     const fetchFees = async () => {
         try {
@@ -164,11 +175,38 @@ const Fees = () => {
             >
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Student ID *</label>
-                        <input 
-                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                            value={formData.StudentID} onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
-                        />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Select Student *</label>
+                        <select 
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                            value={formData.StudentID} 
+                            onChange={(e) => {
+                                const studentId = e.target.value;
+                                const selectedStudent = students.find(s => s.StudentID.toString() === studentId);
+                                
+                                // Calculate fee based on year (New student = Year 1)
+                                let calculatedAmount = formData.Amount;
+                                if (selectedStudent) {
+                                    if (selectedStudent.Year == 1) {
+                                        calculatedAmount = '185000'; // 180k + 5k security deposit
+                                    } else {
+                                        calculatedAmount = '180000'; // Standard fee
+                                    }
+                                }
+                                
+                                setFormData({
+                                    ...formData, 
+                                    StudentID: studentId,
+                                    Amount: calculatedAmount
+                                });
+                            }}
+                        >
+                            <option value="">-- Select a Student --</option>
+                            {students.map(student => (
+                                <option key={student.StudentID} value={student.StudentID}>
+                                    #{student.StudentID} - {student.FullName} (Year {student.Year})
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Amount (₹) *</label>
@@ -176,6 +214,7 @@ const Fees = () => {
                             required type="number" step="0.01" min="0" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
                             value={formData.Amount} onChange={(e) => setFormData({...formData, Amount: e.target.value})}
                         />
+                        {formData.Amount === '185000' && <p className="text-xs text-indigo-600 mt-1">Includes ₹5,000 first-time security deposit</p>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Due Date *</label>
