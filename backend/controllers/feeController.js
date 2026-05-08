@@ -6,7 +6,7 @@ const getFees = async (req, res) => {
         res.json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -17,7 +17,7 @@ const getFeeById = async (req, res) => {
         res.json(rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -31,7 +31,7 @@ const createFee = async (req, res) => {
         res.status(201).json({ id: result.insertId, message: 'Fee record created successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -45,7 +45,7 @@ const updateFee = async (req, res) => {
         res.json({ message: 'Fee record updated successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -55,7 +55,7 @@ const deleteFee = async (req, res) => {
         res.json({ message: 'Fee record deleted successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 

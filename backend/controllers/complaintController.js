@@ -12,7 +12,7 @@ const getComplaints = async (req, res) => {
         res.json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -23,7 +23,7 @@ const getComplaintById = async (req, res) => {
         res.json(rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -37,7 +37,7 @@ const createComplaint = async (req, res) => {
         res.status(201).json({ id: result.insertId, message: 'Complaint created successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -51,7 +51,7 @@ const updateComplaint = async (req, res) => {
         res.json({ message: 'Complaint updated successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 

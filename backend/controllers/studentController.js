@@ -6,7 +6,7 @@ const getStudents = async (req, res) => {
         res.json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -17,7 +17,7 @@ const getStudentById = async (req, res) => {
         res.json(rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -31,7 +31,7 @@ const createStudent = async (req, res) => {
         res.status(201).json({ id: result.insertId, message: 'Student created successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -45,7 +45,7 @@ const updateStudent = async (req, res) => {
         res.json({ message: 'Student updated successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -55,7 +55,7 @@ const deleteStudent = async (req, res) => {
         res.json({ message: 'Student deleted successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 

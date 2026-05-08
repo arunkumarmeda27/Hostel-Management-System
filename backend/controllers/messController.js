@@ -10,7 +10,7 @@ const getMessPlans = async (req, res) => {
         res.json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -21,7 +21,7 @@ const getMessPlanById = async (req, res) => {
         res.json(rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -35,7 +35,7 @@ const createMessPlan = async (req, res) => {
         res.status(201).json({ id: result.insertId, message: 'Mess plan created successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
@@ -49,7 +49,7 @@ const updateMessPlan = async (req, res) => {
         res.json({ message: 'Mess plan updated successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: error.sqlMessage || 'Server error' });
     }
 };
 
