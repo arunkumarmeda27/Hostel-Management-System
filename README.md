@@ -15,7 +15,36 @@ A comprehensive, production-ready Full-Stack Web Application designed specifical
 
 This project heavily relies on advanced SQL and RDBMS concepts to maintain data integrity, security, and performance. 
 
-### 1. Entity-Relationship (ER) Schema Diagram
+### 1. Conceptual ER Diagram
+
+This diagram represents the high-level conceptual model of the system, showing Entities and their Relationships.
+
+```mermaid
+flowchart TD
+    %% Entities
+    S[STUDENT]
+    R[ROOM]
+    F[FEE]
+    C[COMPLAINT]
+    M[MESS_PLAN]
+    A[ADMIN]
+
+    %% Relationships
+    H{Houses}
+    P{Pays}
+    R_C{Raises}
+    Sub{Subscribes}
+
+    %% Connections
+    R ---|1| H ---|N| S
+    S ---|1| P ---|N| F
+    S ---|1| R_C ---|N| C
+    S ---|1| Sub ---|N| M
+```
+
+### 2. Relational Schema Diagram
+
+This diagram represents the logical schema, explicitly detailing tables, attributes, primary keys (PK), foreign keys (FK), and data types.
 
 ```mermaid
 erDiagram
@@ -80,7 +109,7 @@ erDiagram
     STUDENTS ||--o{ MESS_PLANS : "Subscribes"
 ```
 
-### 2. Advanced DBMS Concepts Implemented
+### 3. Advanced DBMS Concepts Implemented
 
 To demonstrate a deep understanding of database management, this project implements several core RDBMS features at the SQL engine level.
 
