@@ -83,8 +83,8 @@ const Mess = () => {
 
     const getTypeColor = (type) => {
         switch(type) {
-            case 'Veg': return 'bg-emerald-100 text-emerald-800';
-            case 'Non-Veg': return 'bg-rose-100 text-rose-800';
+            case 'Veg': return 'bg-blue-100 text-blue-800';
+            case 'Non-Veg': return 'bg-yellow-100 text-yellow-800';
             case 'Special': return 'bg-purple-100 text-purple-800';
             default: return 'bg-gray-100 text-gray-800';
         }
@@ -96,7 +96,7 @@ const Mess = () => {
                 <h1 className="text-2xl font-bold text-gray-900">Mess Management</h1>
                 <button 
                     onClick={openAddModal}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
                 >
                     <Plus size={20} />
                     <span>Assign Mess Plan</span>
@@ -167,14 +167,14 @@ const Mess = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Student ID *</label>
                         <input 
-                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.StudentID} onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
                         />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Plan Type *</label>
                         <select 
-                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
                             value={formData.PlanType} onChange={(e) => setFormData({...formData, PlanType: e.target.value})}
                         >
                             <option value="Veg">Veg</option>
@@ -185,7 +185,7 @@ const Mess = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Amount (₹) *</label>
                         <input 
-                            required type="number" step="0.01" min="0" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="number" step="0.01" min="0" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.Amount} onChange={(e) => setFormData({...formData, Amount: e.target.value})}
                         />
                     </div>
@@ -193,14 +193,14 @@ const Mess = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Start Date *</label>
                             <input 
-                                required type="date" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="date" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.StartDate} onChange={(e) => setFormData({...formData, StartDate: e.target.value})}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">End Date *</label>
                             <input 
-                                required type="date" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="date" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.EndDate} onChange={(e) => setFormData({...formData, EndDate: e.target.value})}
                             />
                         </div>
@@ -215,7 +215,7 @@ const Mess = () => {
                         </button>
                         <button 
                             type="submit"
-                            className="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                         >
                             {editingPlan ? "Save Changes" : "Assign Plan"}
                         </button>

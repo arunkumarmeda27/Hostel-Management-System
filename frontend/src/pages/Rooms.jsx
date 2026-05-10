@@ -93,7 +93,7 @@ const Rooms = () => {
                 <h1 className="text-2xl font-bold text-gray-900">Room Management</h1>
                 <button 
                     onClick={openAddModal}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
                 >
                     <Plus size={20} />
                     <span>Add Room</span>
@@ -137,7 +137,7 @@ const Rooms = () => {
                                 </div>
                                 <div className="w-full bg-gray-100 rounded-full h-2">
                                     <div 
-                                        className="bg-indigo-600 h-2 rounded-full" 
+                                        className="bg-blue-600 h-2 rounded-full" 
                                         style={{ width: `${(room.OccupiedCount / room.Capacity) * 100}%` }}
                                     ></div>
                                 </div>
@@ -160,14 +160,14 @@ const Rooms = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Room Number *</label>
                         <input 
-                            required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.RoomNumber} onChange={(e) => setFormData({...formData, RoomNumber: e.target.value})}
                         />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Room Type *</label>
                         <select 
-                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
                             value={formData.RoomType} onChange={(e) => setFormData({...formData, RoomType: e.target.value})}
                         >
                             <option value="Single">Single</option>
@@ -179,14 +179,14 @@ const Rooms = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Capacity *</label>
                         <input 
-                            required type="number" min="1" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="number" min="1" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.Capacity} onChange={(e) => setFormData({...formData, Capacity: e.target.value})}
                         />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Floor Number *</label>
                         <input 
-                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.FloorNumber} onChange={(e) => setFormData({...formData, FloorNumber: e.target.value})}
                         />
                     </div>
@@ -200,7 +200,7 @@ const Rooms = () => {
                         </button>
                         <button 
                             type="submit"
-                            className="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                         >
                             {editingRoom ? "Save Changes" : "Add Room"}
                         </button>

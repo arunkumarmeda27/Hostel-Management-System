@@ -101,7 +101,7 @@ const Complaints = () => {
                 <h1 className="text-2xl font-bold text-gray-900">Complaints</h1>
                 <button 
                     onClick={openAddModal}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
                 >
                     <Plus size={20} />
                     <span>New Complaint</span>
@@ -168,14 +168,14 @@ const Complaints = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Student ID *</label>
                         <input 
-                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.StudentID} onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
                         />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Status *</label>
                         <select 
-                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
                             value={formData.Status} onChange={(e) => setFormData({...formData, Status: e.target.value})}
                         >
                             <option value="Pending">Pending</option>
@@ -186,7 +186,7 @@ const Complaints = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Complaint Description *</label>
                         <textarea 
-                            required rows="4" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required rows="4" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.ComplaintText} onChange={(e) => setFormData({...formData, ComplaintText: e.target.value})}
                         ></textarea>
                     </div>
@@ -200,7 +200,7 @@ const Complaints = () => {
                         </button>
                         <button 
                             type="submit"
-                            className="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                         >
                             {editingComplaint ? "Save Changes" : "Submit Complaint"}
                         </button>

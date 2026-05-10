@@ -116,7 +116,7 @@ const Students = () => {
                 <h1 className="text-2xl font-bold text-gray-900">Student Management</h1>
                 <button 
                     onClick={openAddModal}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
                 >
                     <Plus size={20} />
                     <span>Add Student</span>
@@ -130,7 +130,7 @@ const Students = () => {
                         <input 
                             type="text" 
                             placeholder="Search students..." 
-                            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -165,7 +165,7 @@ const Students = () => {
                                         <td className="px-6 py-4 text-gray-600">{student.Department}</td>
                                         <td className="px-6 py-4">
                                             {student.RoomNumber ? (
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                                     Room {student.RoomNumber}
                                                 </span>
                                             ) : (
@@ -204,56 +204,56 @@ const Students = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
                             <input 
-                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.FullName} onChange={(e) => setFormData({...formData, FullName: e.target.value})}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
                             <input 
-                                required type="email" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="email" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.Email} onChange={(e) => setFormData({...formData, Email: e.target.value})}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Department *</label>
                             <input 
-                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.Department} onChange={(e) => setFormData({...formData, Department: e.target.value})}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Year *</label>
                             <input 
-                                required type="number" min="1" max="5" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="number" min="1" max="5" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.Year} onChange={(e) => setFormData({...formData, Year: e.target.value})}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
                             <input 
-                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.PhoneNumber} onChange={(e) => setFormData({...formData, PhoneNumber: e.target.value})}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Parent Contact *</label>
                             <input 
-                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.ParentContact} onChange={(e) => setFormData({...formData, ParentContact: e.target.value})}
                             />
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
                             <textarea 
-                                rows="2" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                rows="2" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.Address} onChange={(e) => setFormData({...formData, Address: e.target.value})}
                             ></textarea>
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-1">Assign Room (Optional)</label>
                             <select 
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
                                 value={formData.RoomID} 
                                 onChange={(e) => setFormData({...formData, RoomID: e.target.value})}
                             >
@@ -277,7 +277,7 @@ const Students = () => {
                         </button>
                         <button 
                             type="submit"
-                            className="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                         >
                             {editingStudent ? "Save Changes" : "Add Student"}
                         </button>

@@ -108,7 +108,7 @@ const Fees = () => {
                 <h1 className="text-2xl font-bold text-gray-900">Fee Management</h1>
                 <button 
                     onClick={openAddModal}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
                 >
                     <Plus size={20} />
                     <span>Add Fee Record</span>
@@ -178,7 +178,7 @@ const Fees = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Select Student *</label>
                         <select 
-                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
                             value={formData.StudentID} 
                             onChange={(e) => {
                                 const studentId = e.target.value;
@@ -212,22 +212,22 @@ const Fees = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Amount (₹) *</label>
                         <input 
-                            required type="number" step="0.01" min="0" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="number" step="0.01" min="0" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.Amount} onChange={(e) => setFormData({...formData, Amount: e.target.value})}
                         />
-                        {formData.Amount === '185000' && <p className="text-xs text-indigo-600 mt-1">Includes ₹5,000 first-time security deposit</p>}
+                        {formData.Amount === '185000' && <p className="text-xs text-blue-600 mt-1">Includes ₹5,000 first-time security deposit</p>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Due Date *</label>
                         <input 
-                            required type="date" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            required type="date" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             value={formData.DueDate} onChange={(e) => setFormData({...formData, DueDate: e.target.value})}
                         />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Payment Status *</label>
                         <select 
-                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
                             value={formData.PaymentStatus} onChange={(e) => setFormData({...formData, PaymentStatus: e.target.value})}
                         >
                             <option value="Pending">Pending</option>
@@ -245,7 +245,7 @@ const Fees = () => {
                         </button>
                         <button 
                             type="submit"
-                            className="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                         >
                             {editingFee ? "Save Changes" : "Add Record"}
                         </button>

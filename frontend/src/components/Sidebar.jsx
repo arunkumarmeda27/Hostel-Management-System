@@ -21,7 +21,7 @@ const Sidebar = () => {
                 </div>
                 <div className="flex flex-col">
                     <span className="font-bold text-gray-900 leading-tight">Dayananda Sagar</span>
-                    <span className="text-xs font-semibold text-indigo-600">Institutions Hostel</span>
+                    <span className="text-xs font-semibold text-blue-600">Institutions Hostel</span>
                 </div>
             </div>
             <nav className="flex-1 px-4 py-4 space-y-1">
@@ -34,11 +34,11 @@ const Sidebar = () => {
                             to={item.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                                 isActive 
-                                ? 'bg-indigo-50 text-indigo-700 font-medium' 
+                                ? 'bg-blue-50 text-blue-700 font-medium' 
                                 : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             }`}
                         >
-                            <Icon size={20} className={isActive ? 'text-indigo-600' : 'text-gray-400'} />
+                            <Icon size={20} className={isActive ? 'text-blue-600' : 'text-gray-400'} />
                             {item.name}
                         </Link>
                     );

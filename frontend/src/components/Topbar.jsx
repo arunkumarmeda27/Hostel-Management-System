@@ -19,7 +19,7 @@ const Topbar = () => {
             </div>
             <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2 text-gray-600">
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
                         <User size={16} />
                     </div>
                     <span className="font-medium">{admin.username}</span>
