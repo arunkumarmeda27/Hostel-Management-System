@@ -74,7 +74,7 @@ async function initDB() {
             CREATE TABLE IF NOT EXISTS MessPlans (
                 MessID INT AUTO_INCREMENT PRIMARY KEY,
                 StudentID INT NOT NULL,
-                PlanType ENUM('Veg', 'Non-Veg', 'Special') NOT NULL,
+                PlanType ENUM('Veg', 'Non-Veg') NOT NULL,
                 Amount DECIMAL(10, 2) NOT NULL,
                 StartDate DATE NOT NULL,
                 EndDate DATE NOT NULL,

@@ -85,7 +85,6 @@ const Mess = () => {
         switch(type) {
             case 'Veg': return 'bg-blue-100 text-blue-800';
             case 'Non-Veg': return 'bg-yellow-100 text-yellow-800';
-            case 'Special': return 'bg-purple-100 text-purple-800';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
@@ -179,7 +178,6 @@ const Mess = () => {
                         >
                             <option value="Veg">Veg</option>
                             <option value="Non-Veg">Non-Veg</option>
-                            <option value="Special">Special</option>
                         </select>
                     </div>
                     <div>

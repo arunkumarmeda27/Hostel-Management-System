@@ -97,7 +97,7 @@ erDiagram
     MESS_PLANS {
         int MessID PK
         int StudentID FK
-        enum PlanType "Veg, Non-Veg, Special"
+        enum PlanType "Veg, Non-Veg"
         decimal Amount
         date StartDate
         date EndDate
