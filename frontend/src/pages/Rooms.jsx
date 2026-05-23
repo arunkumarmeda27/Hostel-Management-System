@@ -146,6 +146,14 @@ const Rooms = () => {
                                         {room.OccupancyStatus}
                                     </span>
                                 </div>
+                                {room.StudentNames && (
+                                    <div className="mt-3 pt-3 border-t border-gray-100">
+                                        <p className="text-[10px] uppercase tracking-wider text-gray-400 font-bold mb-1">Occupants</p>
+                                        <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+                                            {room.StudentNames}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))

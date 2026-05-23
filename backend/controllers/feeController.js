@@ -2,7 +2,17 @@ const db = require('../config/db');
 
 const getFees = async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM FeeReportsView');
+        let query = 'SELECT * FROM FeeReportsView';
+        let params = [];
+
+        if (req.user.role === 'student') {
+            query += ' WHERE StudentID = ?';
+            params.push(req.user.id);
+        }
+
+        query += ' ORDER BY DueDate DESC';
+
+        const [rows] = await db.query(query, params);
         res.json(rows);
     } catch (error) {
         console.error(error);

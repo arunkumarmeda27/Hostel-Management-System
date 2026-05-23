@@ -21,7 +21,9 @@ const Students = () => {
         Email: '',
         Address: '',
         ParentContact: '',
-        RoomID: ''
+        RoomID: '',
+        Username: '',
+        Password: ''
     });
 
     useEffect(() => {
@@ -65,7 +67,8 @@ const Students = () => {
         setEditingStudent(null);
         setFormData({
             FullName: '', Department: '', Year: '', PhoneNumber: '', 
-            Email: '', Address: '', ParentContact: '', RoomID: ''
+            Email: '', Address: '', ParentContact: '', RoomID: '',
+            Username: '', Password: ''
         });
         setIsModalOpen(true);
     };
@@ -80,7 +83,9 @@ const Students = () => {
             Email: student.Email || '',
             Address: student.Address || '',
             ParentContact: student.ParentContact || '',
-            RoomID: student.RoomID || ''
+            RoomID: student.RoomID || '',
+            Username: student.Username || '',
+            Password: '' // Don't show existing password
         });
         setIsModalOpen(true);
     };
@@ -242,6 +247,27 @@ const Students = () => {
                                 required type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 value={formData.ParentContact} onChange={(e) => setFormData({...formData, ParentContact: e.target.value})}
                             />
+                        </div>
+                        <div className="border-t border-gray-100 pt-4 md:col-span-2">
+                            <h4 className="text-sm font-semibold text-gray-900 mb-4">Student Credentials</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Username (defaults to Email)</label>
+                                    <input 
+                                        type="text" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                        value={formData.Username} onChange={(e) => setFormData({...formData, Username: e.target.value})}
+                                        placeholder={formData.Email || "username"}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Password {editingStudent ? "(leave blank to keep current)" : "(defaults to Email)"}</label>
+                                    <input 
+                                        type="password" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                        value={formData.Password} onChange={(e) => setFormData({...formData, Password: e.target.value})}
+                                        placeholder="••••••••"
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>

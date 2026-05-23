@@ -2,8 +2,20 @@ const db = require('../config/db');
 
 const getRooms = async (req, res) => {
     try {
-        // Fetching from view if we want to use the RoomOccupancyView
-        const [rows] = await db.query('SELECT * FROM RoomOccupancyView');
+        const [rows] = await db.query(`
+            SELECT 
+                r.*, 
+                (r.Capacity - r.OccupiedCount) AS AvailableSpots,
+                CASE 
+                    WHEN r.OccupiedCount >= r.Capacity THEN 'Full'
+                    WHEN r.OccupiedCount = 0 THEN 'Empty'
+                    ELSE 'Partially Occupied'
+                END AS OccupancyStatus,
+                GROUP_CONCAT(s.FullName SEPARATOR ', ') as StudentNames
+            FROM Rooms r
+            LEFT JOIN Students s ON r.RoomID = s.RoomID
+            GROUP BY r.RoomID
+        `);
         res.json(rows);
     } catch (error) {
         console.error(error);

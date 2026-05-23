@@ -1,0 +1,46 @@
+how to run DBMS 
+back end -node index.js
+database - 
+PS C:\Users\medaa\OneDrive\Desktop\DBMS Mini project\database> .\seed.sql
+PS C:\Users\medaa\OneDrive\Desktop\DBMS Mini project\database> .\schema.sql
+PS C:\Users\medaa\OneDrive\Desktop\DBMS Mini project\database>
+frontend - npm run dev
+
+
+sql commands
+Listed directory DBMS%20Mini%20project
+Listed directory database
+Viewed schema.sql:1-172
+
+Since you are using a **MySQL** database for your `hostel_management` project, here are the exact commands you can copy and paste into your MySQL terminal or database client (like phpMyAdmin or MySQL Workbench).
+
+First, make sure you are using your database:
+```sql
+USE hostel_management;
+```
+
+### 1. To view the structure (columns) of your tables:
+Run any of these commands to see how the table was created (its columns, data types, and primary keys):
+
+*   **Admins Table:** `DESCRIBE Admins;`
+*   **Rooms Table:** `DESCRIBE Rooms;`
+*   **Students Table:** `DESCRIBE Students;`
+*   **Fees Table:** `DESCRIBE Fees;`
+*   **Complaints Table:** `DESCRIBE Complaints;`
+*   **MessPlans Table:** `DESCRIBE MessPlans;`
+*   **Announcements Table:** `DESCRIBE Announcements;`
+
+### 2. To view the actual data (records) inside your tables:
+Run any of these to see the information currently stored in them:
+
+*   **View all Students:** `SELECT * FROM Students;`
+*   **View all Rooms:** `SELECT * FROM Rooms;`
+*   **View all Admins:** `SELECT * FROM Admins;`
+*   **View all Fees:** `SELECT * FROM Fees;`
+*   **View all Complaints:** `SELECT * FROM Complaints;`
+
+### 3. To view your Reports (Views):
+You also have two custom views created in your schema. You can view them exactly like tables:
+
+*   **View Fee Reports:** `SELECT * FROM FeeReportsView;`
+*   **View Room Occupancy:** `SELECT * FROM RoomOccupancyView;`

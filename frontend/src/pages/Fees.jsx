@@ -8,6 +8,8 @@ const Fees = () => {
     const [fees, setFees] = useState([]);
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const isAdmin = user.role === 'admin';
     
     // Modal & Form State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +23,7 @@ const Fees = () => {
 
     useEffect(() => {
         fetchFees();
-        fetchStudents();
+        if (isAdmin) fetchStudents();
     }, []);
 
     const fetchStudents = async () => {
@@ -106,13 +108,15 @@ const Fees = () => {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <h1 className="text-2xl font-bold text-gray-900">Fee Management</h1>
-                <button 
-                    onClick={openAddModal}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
-                >
-                    <Plus size={20} />
-                    <span>Add Fee Record</span>
-                </button>
+                {isAdmin && (
+                    <button 
+                        onClick={openAddModal}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    >
+                        <Plus size={20} />
+                        <span>Add Fee Record</span>
+                    </button>
+                )}
             </div>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -125,7 +129,7 @@ const Fees = () => {
                                 <th className="px-6 py-4 font-medium">Amount</th>
                                 <th className="px-6 py-4 font-medium">Due Date</th>
                                 <th className="px-6 py-4 font-medium">Status</th>
-                                <th className="px-6 py-4 font-medium text-right">Actions</th>
+                                <th className="px-6 py-4 font-medium text-right">{isAdmin ? 'Actions' : ''}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 text-sm">
@@ -149,18 +153,22 @@ const Fees = () => {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 flex items-center justify-end gap-3">
-                                            <button 
-                                                onClick={() => openEditModal(fee)}
-                                                className="text-blue-600 hover:text-blue-800 transition-colors"
-                                            >
-                                                <Edit size={18} />
-                                            </button>
-                                            <button 
-                                                onClick={() => handleDelete(fee.FeeID)}
-                                                className="text-red-600 hover:text-red-800 transition-colors"
-                                            >
-                                                <Trash2 size={18} />
-                                            </button>
+                                            {isAdmin && (
+                                                <>
+                                                    <button 
+                                                        onClick={() => openEditModal(fee)}
+                                                        className="text-blue-600 hover:text-blue-800 transition-colors"
+                                                    >
+                                                        <Edit size={18} />
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => handleDelete(fee.FeeID)}
+                                                        className="text-red-600 hover:text-red-800 transition-colors"
+                                                    >
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                </>
+                                            )}
                                         </td>
                                     </tr>
                                 ))

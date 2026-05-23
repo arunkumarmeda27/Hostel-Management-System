@@ -2,11 +2,19 @@ const db = require('../config/db');
 
 const getMessPlans = async (req, res) => {
     try {
-        const [rows] = await db.query(`
+        let query = `
             SELECT m.*, s.FullName 
             FROM MessPlans m
             JOIN Students s ON m.StudentID = s.StudentID
-        `);
+        `;
+        let params = [];
+
+        if (req.user.role === 'student') {
+            query += ' WHERE m.StudentID = ?';
+            params.push(req.user.id);
+        }
+
+        const [rows] = await db.query(query, params);
         res.json(rows);
     } catch (error) {
         console.error(error);

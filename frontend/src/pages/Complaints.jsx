@@ -7,12 +7,14 @@ import Modal from '../components/Modal';
 const Complaints = () => {
     const [complaints, setComplaints] = useState([]);
     const [loading, setLoading] = useState(true);
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const isAdmin = user.role === 'admin';
 
     // Modal & Form State
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingComplaint, setEditingComplaint] = useState(null);
     const [formData, setFormData] = useState({
-        StudentID: '',
+        StudentID: user.role === 'student' ? user.id : '',
         ComplaintText: '',
         Status: 'Pending'
     });
@@ -46,14 +48,14 @@ const Complaints = () => {
 
     const openAddModal = () => {
         setEditingComplaint(null);
-        setFormData({ StudentID: '', ComplaintText: '', Status: 'Pending' });
+        setFormData({ StudentID: user.role === 'student' ? user.id : '', ComplaintText: '', Status: 'Pending' });
         setIsModalOpen(true);
     };
 
     const openEditModal = (complaint) => {
         setEditingComplaint(complaint);
         setFormData({
-            StudentID: complaint.StudentID || '',
+            StudentID: complaint.StudentID || (user.role === 'student' ? user.id : ''),
             ComplaintText: complaint.ComplaintText || '',
             Status: complaint.Status || 'Pending'
         });
@@ -125,19 +127,23 @@ const Complaints = () => {
                                     <div className="flex flex-col items-end gap-2">
                                         {getStatusBadge(complaint.Status)}
                                         <div className="flex gap-2">
-                                            <button onClick={() => openEditModal(complaint)} className="text-blue-500 hover:text-blue-700">
-                                                <Edit size={14} />
-                                            </button>
-                                            <button onClick={() => handleDelete(complaint.ComplaintID)} className="text-red-500 hover:text-red-700">
-                                                <Trash2 size={14} />
-                                            </button>
+                                            {(isAdmin || (user.role === 'student' && complaint.Status === 'Pending')) && (
+                                                <>
+                                                    <button onClick={() => openEditModal(complaint)} className="text-blue-500 hover:text-blue-700">
+                                                        <Edit size={14} />
+                                                    </button>
+                                                    <button onClick={() => handleDelete(complaint.ComplaintID)} className="text-red-500 hover:text-red-700">
+                                                        <Trash2 size={14} />
+                                                    </button>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
                                 <p className="text-gray-700 text-sm mb-6">{complaint.ComplaintText}</p>
                             </div>
                             
-                            {complaint.Status !== 'Resolved' && (
+                            {isAdmin && complaint.Status !== 'Resolved' && (
                                 <div className="flex gap-2 mt-auto border-t border-gray-100 pt-4">
                                     {complaint.Status === 'Pending' && (
                                         <button 
@@ -165,24 +171,28 @@ const Complaints = () => {
                 title={editingComplaint ? "Edit Complaint" : "New Complaint"}
             >
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Student ID *</label>
-                        <input 
-                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            value={formData.StudentID} onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Status *</label>
-                        <select 
-                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
-                            value={formData.Status} onChange={(e) => setFormData({...formData, Status: e.target.value})}
-                        >
-                            <option value="Pending">Pending</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Resolved">Resolved</option>
-                        </select>
-                    </div>
+                    {isAdmin && (
+                        <>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Student ID *</label>
+                                <input 
+                                    required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    value={formData.StudentID} onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Status *</label>
+                                <select 
+                                    required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+                                    value={formData.Status} onChange={(e) => setFormData({...formData, Status: e.target.value})}
+                                >
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </div>
+                        </>
+                    )}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Complaint Description *</label>
                         <textarea 

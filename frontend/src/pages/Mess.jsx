@@ -6,7 +6,10 @@ import Modal from '../components/Modal';
 
 const Mess = () => {
     const [plans, setPlans] = useState([]);
+    const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const isAdmin = user.role === 'admin';
 
     // Modal & Form State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +24,17 @@ const Mess = () => {
 
     useEffect(() => {
         fetchPlans();
+        if (isAdmin) fetchStudents();
     }, []);
+
+    const fetchStudents = async () => {
+        try {
+            const { data } = await api.get('/students');
+            setStudents(data);
+        } catch (error) {
+            console.error('Failed to fetch students');
+        }
+    };
 
     const fetchPlans = async () => {
         try {
@@ -93,13 +106,15 @@ const Mess = () => {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <h1 className="text-2xl font-bold text-gray-900">Mess Management</h1>
-                <button 
-                    onClick={openAddModal}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
-                >
-                    <Plus size={20} />
-                    <span>Assign Mess Plan</span>
-                </button>
+                {isAdmin && (
+                    <button 
+                        onClick={openAddModal}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
+                    >
+                        <Plus size={20} />
+                        <span>Assign Mess Plan</span>
+                    </button>
+                )}
             </div>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -112,7 +127,7 @@ const Mess = () => {
                                 <th className="px-6 py-4 font-medium">Plan Type</th>
                                 <th className="px-6 py-4 font-medium">Amount</th>
                                 <th className="px-6 py-4 font-medium">Duration</th>
-                                <th className="px-6 py-4 font-medium text-right">Actions</th>
+                                <th className="px-6 py-4 font-medium text-right">{isAdmin ? 'Actions' : ''}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 text-sm">
@@ -137,18 +152,22 @@ const Mess = () => {
                                             {new Date(plan.StartDate).toLocaleDateString()} - {new Date(plan.EndDate).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 flex items-center justify-end gap-3">
-                                            <button 
-                                                onClick={() => openEditModal(plan)}
-                                                className="text-blue-600 hover:text-blue-800 transition-colors"
-                                            >
-                                                <Edit size={18} />
-                                            </button>
-                                            <button 
-                                                onClick={() => handleDelete(plan.MessID)}
-                                                className="text-red-600 hover:text-red-800 transition-colors"
-                                            >
-                                                <Trash2 size={18} />
-                                            </button>
+                                            {isAdmin && (
+                                                <>
+                                                    <button 
+                                                        onClick={() => openEditModal(plan)}
+                                                        className="text-blue-600 hover:text-blue-800 transition-colors"
+                                                    >
+                                                        <Edit size={18} />
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => handleDelete(plan.MessID)}
+                                                        className="text-red-600 hover:text-red-800 transition-colors"
+                                                    >
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                </>
+                                            )}
                                         </td>
                                     </tr>
                                 ))
@@ -164,11 +183,19 @@ const Mess = () => {
             >
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Student ID *</label>
-                        <input 
-                            required type="number" className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            value={formData.StudentID} onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
-                        />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Select Student *</label>
+                        <select 
+                            required className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+                            value={formData.StudentID} 
+                            onChange={(e) => setFormData({...formData, StudentID: e.target.value})}
+                        >
+                            <option value="">-- Select a Student --</option>
+                            {students.map(student => (
+                                <option key={student.StudentID} value={student.StudentID}>
+                                    #{student.StudentID} - {student.FullName}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Plan Type *</label>

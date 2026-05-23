@@ -10,7 +10,8 @@ async function fix() {
         database: process.env.DB_NAME
     });
     
-    const hash = "$2b$10$ZxPopSOtUd/vrkCC7W6oz.SB.5TMiuSvoJwSB8a9hQrtVtuhzyh9S";
+    const bcrypt = require('bcryptjs');
+    const hash = await bcrypt.hash('admin123', 10);
     await c.query('UPDATE Admins SET PasswordHash = ? WHERE Username = ?', [hash, 'admin']);
     console.log('Fixed hash successfully!');
     process.exit(0);

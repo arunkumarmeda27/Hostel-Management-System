@@ -1,20 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import { toast } from 'react-hot-toast';
 import { Home, Lock, User } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('admin'); // 'admin' or 'student'
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/login', { username, password });
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('admin', JSON.stringify(data.admin));
+            const endpoint = role === 'admin' ? '/auth/login' : '/auth/student/login';
+            const { data } = await api.post(endpoint, { username, password });
+            login(data.token, data.user);
             toast.success('Login successful!');
             navigate('/');
         } catch (error) {
@@ -38,6 +41,25 @@ const Login = () => {
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
+                    <div className="flex mb-6 bg-gray-100 p-1 rounded-lg">
+                        <button
+                            onClick={() => setRole('admin')}
+                            className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
+                                role === 'admin' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        >
+                            Admin
+                        </button>
+                        <button
+                            onClick={() => setRole('student')}
+                            className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
+                                role === 'student' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        >
+                            Student
+                        </button>
+                    </div>
+
                     <form className="space-y-6" onSubmit={handleLogin}>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">

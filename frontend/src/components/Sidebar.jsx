@@ -1,17 +1,30 @@
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, Home, CreditCard, MessageSquare, Utensils } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Sidebar = () => {
     const location = useLocation();
+    const { role } = useAuth();
 
-    const menuItems = [
+    const adminMenuItems = [
         { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
         { name: 'Students', icon: Users, path: '/students' },
         { name: 'Rooms', icon: Home, path: '/rooms' },
         { name: 'Fees', icon: CreditCard, path: '/fees' },
         { name: 'Complaints', icon: MessageSquare, path: '/complaints' },
         { name: 'Mess', icon: Utensils, path: '/mess' },
+        { name: 'Announcements', icon: MessageSquare, path: '/announcements' },
     ];
+
+    const studentMenuItems = [
+        { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
+        { name: 'Fees', icon: CreditCard, path: '/fees' },
+        { name: 'Mess', icon: Utensils, path: '/mess' },
+        { name: 'Complaints', icon: MessageSquare, path: '/complaints' },
+        { name: 'Announcements', icon: MessageSquare, path: '/announcements' },
+    ];
+
+    const menuItems = role === 'admin' ? adminMenuItems : studentMenuItems;
 
     return (
         <aside className="w-64 bg-white border-r border-gray-200 h-screen hidden md:flex flex-col shadow-sm">

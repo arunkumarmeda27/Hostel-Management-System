@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS Students (
     Year INT NOT NULL,
     PhoneNumber VARCHAR(15) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
+    Username VARCHAR(50) UNIQUE,
+    PasswordHash VARCHAR(255),
     Address TEXT,
     ParentContact VARCHAR(15) NOT NULL,
     RoomID INT,
@@ -66,6 +68,16 @@ CREATE TABLE IF NOT EXISTS MessPlans (
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
     FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE CASCADE
+);
+
+-- 7. Announcements Table
+CREATE TABLE IF NOT EXISTS Announcements (
+    AnnouncementID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Content TEXT NOT NULL,
+    CreatedBy INT,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (CreatedBy) REFERENCES Admins(AdminID) ON DELETE SET NULL
 );
 
 -- --------------------------------------------------------

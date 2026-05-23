@@ -17,34 +17,44 @@ This project heavily relies on advanced SQL and RDBMS concepts to maintain data 
 
 ### 1. Conceptual ER Diagram
 
-This diagram represents the high-level conceptual model of the system, showing Entities and their Relationships.
+This diagram represents the high-level conceptual model of the system, showing Entities (represented as rounded rectangles), Relationships (represented as diamonds), and their corresponding connections with cardinalities.
 
 ```mermaid
 flowchart TD
     %% Entities
-    S[STUDENT]
-    R[ROOM]
-    F[FEE]
-    C[COMPLAINT]
-    M[MESS_PLAN]
-    A[ADMIN]
+    S([STUDENT])
+    R([ROOM])
+    F([FEE])
+    C([COMPLAINT])
+    M([MESS_PLAN])
+    A([ADMIN])
+    AN([ANNOUNCEMENT])
 
     %% Relationships
     H{Houses}
     P{Pays}
     R_C{Raises}
     Sub{Subscribes}
+    Cr{Creates}
 
     %% Connections
     R ---|1| H ---|N| S
     S ---|1| P ---|N| F
     S ---|1| R_C ---|N| C
     S ---|1| Sub ---|N| M
+    A ---|1| Cr ---|N| AN
+    
+    %% Premium harmonious color palettes for professional look
+    classDef entity fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
+    classDef relation fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#b45309,font-weight:bold;
+    
+    class S,R,F,C,M,A,AN entity;
+    class H,P,R_C,Sub,Cr relation;
 ```
 
 ### 2. Relational Schema Diagram
 
-This diagram represents the logical schema, explicitly detailing tables, attributes, primary keys (PK), foreign keys (FK), and data types.
+This diagram represents the logical schema, explicitly detailing tables, attributes, primary keys (PK), foreign keys (FK), unique constraints (UK), and database types.
 
 ```mermaid
 erDiagram
@@ -71,6 +81,8 @@ erDiagram
         int Year
         varchar PhoneNumber
         varchar Email UK
+        varchar Username UK
+        varchar PasswordHash
         text Address
         varchar ParentContact
         int RoomID FK
@@ -102,11 +114,20 @@ erDiagram
         date StartDate
         date EndDate
     }
+    
+    ANNOUNCEMENTS {
+        int AnnouncementID PK
+        varchar Title
+        text Content
+        int CreatedBy FK
+        timestamp CreatedAt
+    }
 
     ROOMS ||--o{ STUDENTS : "Houses"
     STUDENTS ||--o{ FEES : "Pays"
     STUDENTS ||--o{ COMPLAINTS : "Raises"
     STUDENTS ||--o{ MESS_PLANS : "Subscribes"
+    ADMINS ||--o{ ANNOUNCEMENTS : "Creates"
 ```
 
 ### 3. Advanced DBMS Concepts Implemented

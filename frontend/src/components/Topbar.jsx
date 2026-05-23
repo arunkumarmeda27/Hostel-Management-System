@@ -1,14 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { LogOut, User } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Topbar = () => {
     const navigate = useNavigate();
-    const adminStr = localStorage.getItem('admin');
-    const admin = adminStr ? JSON.parse(adminStr) : { username: 'Admin' };
+    const { user, logout } = useAuth();
+    
+    const displayName = user?.fullName || user?.username || 'User';
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('admin');
+        logout();
         navigate('/login');
     };
 
@@ -22,7 +23,7 @@ const Topbar = () => {
                     <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
                         <User size={16} />
                     </div>
-                    <span className="font-medium">{admin.username}</span>
+                    <span className="font-medium">{displayName}</span>
                 </div>
                 <button 
                     onClick={handleLogout}
